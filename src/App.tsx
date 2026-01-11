@@ -2,20 +2,17 @@ import React, { type FC } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { GameBoard } from '@/components/ui/game-board'
+import WelcomeScreen from '@/components/ui/welcome-screen'
 
 import { useAppDispatch, useAppSelector } from '@/hooks/store.ts'
-import { type Difficulty, setDifficulty, initializeGame } from '@/store/features/game/game-slice.ts'
+import { initializeGame } from '@/store/features/game/game-slice.ts'
 
 const App: FC = () => {
-  const { score, moveCount, gameCompleted, difficulty, matchedPairs, cardContents } =
-    useAppSelector(state => state.game)
+  const { score, moveCount, gameCompleted, matchedPairs, cardContents } = useAppSelector(
+    state => state.game
+  )
   const dispatch = useAppDispatch()
   const [gameStarted, setGameStarted] = React.useState(false)
-  const [showHowToPlay, setShowHowToPlay] = React.useState(false)
-
-  const handleDifficultyChange = (newDifficulty: Difficulty) => {
-    dispatch(setDifficulty(newDifficulty))
-  }
 
   const handleStartGame = () => {
     setGameStarted(true)
@@ -24,7 +21,6 @@ const App: FC = () => {
 
   const handleBackToMenu = () => {
     setGameStarted(false)
-    setShowHowToPlay(false)
   }
 
   const allPairsFound =
@@ -33,67 +29,7 @@ const App: FC = () => {
   return (
     <div className="max-w-7xl mx-auto p-6 text-center h-full flex flex-col bg-background rounded-2xl">
       {!gameStarted ? (
-        <div className="flex flex-col flex-grow">
-          {!showHowToPlay ? (
-            <div className="flex flex-col items-center justify-center flex-grow">
-              <h1 className="text-7xl font-bold mb-8 text-primary flex justify-center items-center gap-4">
-                <span className="text-4xl">🎮</span>
-                <span>Memory Game</span>
-                <span className="text-4xl">🧠</span>
-              </h1>
-              <p className="text-xl mb-6 bg-secondary/50 p-4 rounded-xl border-2 border-primary/20 shadow-[0_4px_0_0] shadow-primary/20 max-w-md">
-                Welcome to the Memory Game!
-              </p>
-              <div className="flex justify-center gap-4 mb-6">
-                <Button onClick={handleStartGame} variant="default" size="lg">
-                  Start Game
-                </Button>
-                <Button onClick={() => setShowHowToPlay(true)} variant="outline" size="lg">
-                  How to Play
-                </Button>
-              </div>
-
-              <div className="mt-6 flex justify-center gap-4">
-                <Button
-                  onClick={() => handleDifficultyChange('easy')}
-                  variant={difficulty === 'easy' ? 'default' : 'outline'}
-                >
-                  Easy
-                </Button>
-                <Button
-                  onClick={() => handleDifficultyChange('medium')}
-                  variant={difficulty === 'medium' ? 'default' : 'outline'}
-                >
-                  Medium
-                </Button>
-                <Button
-                  onClick={() => handleDifficultyChange('hard')}
-                  variant={difficulty === 'hard' ? 'default' : 'outline'}
-                >
-                  Hard
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <div className="max-w-2xl mx-auto flex flex-col items-center justify-center flex-grow">
-              <h2 className="text-3xl font-bold mb-6 text-primary">How to Play</h2>
-              <ul className="text-left list-disc pl-6 space-y-3 mb-8 bg-secondary/50 p-6 rounded-xl border-2 border-primary/20 shadow-[0_4px_0_0] shadow-primary/20">
-                <li className="text-lg">
-                  The board is filled with face-down cards, each with an emoji hidden underneath.
-                </li>
-                <li className="text-lg">Click two cards to flip them over.</li>
-                <li className="text-lg">
-                  If the two cards match, they stay face-up and you earn points.
-                </li>
-                <li className="text-lg">If they don't match, they flip back after 1 second.</li>
-                <li className="text-lg">Continue until all pairs are found.</li>
-              </ul>
-              <Button onClick={() => setShowHowToPlay(false)} variant="outline" size="lg">
-                Back to Menu
-              </Button>
-            </div>
-          )}
-        </div>
+        <WelcomeScreen onStartGame={handleStartGame} onBackToMenu={handleBackToMenu} />
       ) : (
         <div className="flex flex-col flex-grow">
           {allPairsFound ? (

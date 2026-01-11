@@ -27,7 +27,7 @@ const App: FC = () => {
     gameCompleted && cardContents.length > 0 && matchedPairs.length === cardContents.length
 
   return (
-    <div className="max-w-7xl mx-auto p-6 text-center h-full flex flex-col bg-background rounded-2xl">
+    <div className="max-w-7xl mx-auto p-6 text-center h-full flex flex-col bg-background/80 backdrop-blur-sm rounded-2xl">
       {!gameStarted ? (
         <WelcomeScreen onStartGame={handleStartGame} onBackToMenu={handleBackToMenu} />
       ) : (

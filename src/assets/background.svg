@@ -1,0 +1,74 @@
+<svg width="100%" height="100%" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- Neon gradient blobs -->
+        <radialGradient id="blob1" cx="30%" cy="30%" r="60%">
+            <stop offset="0%" stop-color="#ff86ff" />
+            <stop offset="60%" stop-color="#c084fc" />
+            <stop offset="100%" stop-color="#4c1d95" />
+        </radialGradient>
+
+        <radialGradient id="blob2" cx="70%" cy="70%" r="60%">
+            <stop offset="0%" stop-color="#7dfcfc" />
+            <stop offset="60%" stop-color="#38bdf8" />
+            <stop offset="100%" stop-color="#1e3a8a" />
+        </radialGradient>
+
+        <!-- Star glow gradient -->
+        <radialGradient id="starGlow" r="50%">
+            <stop offset="0%" stop-color="rgba(255,255,255,1)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+        </radialGradient>
+    </defs>
+
+    <!-- Background blobs -->
+    <rect width="1440" height="900" fill="url(#blob1)" />
+    <rect width="1440" height="900" fill="url(#blob2)" opacity="0.7" />
+
+    <!-- Animated stars group -->
+    <g>
+        <!-- Repeat multiple star circles with animation -->
+        <circle cx="200" cy="150" r="2" fill="white">
+            <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="400" cy="180" r="2.5" fill="white">
+            <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="800" cy="120" r="2" fill="white">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="1200" cy="200" r="3" fill="white">
+            <animate attributeName="opacity" values="1;0.1;1" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="950" cy="360" r="2" fill="white">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="600" cy="420" r="2.2" fill="white">
+            <animate attributeName="opacity" values="1;0.2;1" dur="2.7s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="300" cy="500" r="1.8" fill="white">
+            <animate attributeName="opacity" values="1;0.1;1" dur="3s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="1100" cy="600" r="2.5" fill="white">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="850" cy="700" r="3" fill="white">
+            <animate attributeName="opacity" values="1;0.2;1" dur="2.1s" repeatCount="indefinite"/>
+        </circle>
+
+        <circle cx="450" cy="720" r="2" fill="white">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="3s" repeatCount="indefinite"/>
+        </circle>
+    </g>
+
+    <!-- Glowing star clusters -->
+    <circle cx="900" cy="280" r="180" fill="url(#starGlow)" opacity="0.4" />
+    <circle cx="350" cy="650" r="160" fill="url(#starGlow)" opacity="0.3" />
+</svg>

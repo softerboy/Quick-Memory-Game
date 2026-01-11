@@ -9,8 +9,8 @@ export type BoardSize = {
 
 export const BOARD_SIZES: Record<Difficulty, BoardSize> = {
   easy: { rows: 6, columns: 8 },
-  medium: { rows: 6, columns: 12 },
-  hard: { rows: 6, columns: 16 },
+  medium: { rows: 7, columns: 12 },
+  hard: { rows: 9, columns: 16 },
 }
 
 export type CardContent = {

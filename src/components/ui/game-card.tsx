@@ -4,23 +4,21 @@ import { cn } from '@/lib/utils'
 interface GameCardProps extends React.HTMLAttributes<HTMLDivElement> {
   frontContent?: React.ReactNode
   backContent?: React.ReactNode
+  isFlipped?: boolean
 }
 
 const GameCard = React.forwardRef<HTMLDivElement, GameCardProps>(
-  ({ className, frontContent, backContent, ...props }, ref) => {
-    const [isOpen, setIsOpen] = React.useState(false)
-
+  ({ className, frontContent, backContent, isFlipped = false, ...props }, ref) => {
     return (
       <div
         className={cn('relative w-full h-full perspective-1000 cursor-pointer', className)}
         ref={ref}
-        onClick={() => setIsOpen(!isOpen)}
         {...props}
       >
         <div
           className={cn(
             'relative w-full h-full transition-transform duration-500 transform-style-3d',
-            isOpen ? 'rotate-y-180' : ''
+            isFlipped ? 'rotate-y-180' : ''
           )}
         >
           {/* Front of card */}

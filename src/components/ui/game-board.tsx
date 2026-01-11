@@ -35,22 +35,25 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
 
     return (
       <div
-        className={cn('w-full grid gap-4 p-4 justify-center', className)}
+        className={cn(
+          'w-full h-full grid gap-1 sm:gap-2 p-1 sm:p-2 justify-center content-center max-h-full',
+          className
+        )}
         style={{
-          gridTemplateColumns: `repeat(${columns}, auto)`,
-          gridTemplateRows: `repeat(${rows}, auto)`,
+          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
         }}
         ref={ref}
         {...props}
       >
         {cardContents.map((card, index) => (
-          <div key={index} className="aspect-square w-24 h-24">
+          <div key={index} className="aspect-square w-full max-w-full max-h-full">
             <GameCard
               onClick={() => dispatch(flipCard(index))}
               isFlipped={flippedCards.includes(index) || matchedPairs.includes(index)}
               backContent={
-                <div className="text-center p-2">
-                  <span className="text-4xl">{card.emoji}</span>
+                <div className="text-center p-1">
+                  <span className="text-3xl sm:text-2xl md:text-3xl">{card.emoji}</span>
                 </div>
               }
             />

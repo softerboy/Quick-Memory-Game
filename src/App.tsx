@@ -31,14 +31,14 @@ const App: FC = () => {
     gameCompleted && cardContents.length > 0 && matchedPairs.length === cardContents.length
 
   return (
-    <div className="max-w-7xl mx-auto p-4 text-center">
-      <h1 className="text-4xl font-bold mb-4">Memory Game</h1>
+    <div className="max-w-7xl mx-auto p-4 text-center h-full flex flex-col">
+      <h1 className="text-3xl font-bold mb-2">Memory Game</h1>
 
       {!gameStarted ? (
-        <>
+        <div className="flex flex-col flex-grow">
           {!showHowToPlay ? (
-            <>
-              <p className="text-lg mb-6">Welcome to the Memory Game!</p>
+            <div className="flex flex-col items-center justify-center flex-grow">
+              <p className="text-lg mb-4">Welcome to the Memory Game!</p>
               <div className="flex justify-center gap-4 mb-4">
                 <Button onClick={handleStartGame} variant="default" size="lg">
                   Start Game
@@ -48,7 +48,7 @@ const App: FC = () => {
                 </Button>
               </div>
 
-              <div className="mt-4 mb-8 flex justify-center gap-4">
+              <div className="mt-4 flex justify-center gap-4">
                 <Button
                   onClick={() => handleDifficultyChange('easy')}
                   variant={difficulty === 'easy' ? 'default' : 'outline'}
@@ -68,9 +68,9 @@ const App: FC = () => {
                   Hard
                 </Button>
               </div>
-            </>
+            </div>
           ) : (
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-2xl mx-auto flex flex-col items-center justify-center flex-grow">
               <h2 className="text-2xl font-bold mb-4">How to Play</h2>
               <ul className="text-left list-disc pl-6 space-y-2 mb-6">
                 <li>
@@ -86,11 +86,11 @@ const App: FC = () => {
               </Button>
             </div>
           )}
-        </>
+        </div>
       ) : (
-        <div className="mb-6">
+        <div className="flex flex-col flex-grow">
           {allPairsFound ? (
-            <div className="flex flex-col items-center justify-center h-[70vh]">
+            <div className="flex flex-col items-center justify-center flex-grow">
               <h2 className="text-3xl font-bold mb-4">🎉 Congratulations! 🎉</h2>
               <p className="text-xl mb-6">You found all the pairs!</p>
               <div className="text-lg mb-8">
@@ -122,8 +122,10 @@ const App: FC = () => {
                 </div>
               </div>
 
-              <div className="h-[70vh]">
-                <GameBoard />
+              <div className="flex-grow overflow-hidden flex items-center justify-center">
+                <div className="w-full h-full max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-140px)] md:max-h-[calc(100vh-160px)]">
+                  <GameBoard />
+                </div>
               </div>
             </>
           )}

@@ -6,14 +6,12 @@ import { GameCard } from './game-card'
 import { useAppDispatch, useAppSelector } from '@/hooks/store.ts'
 import { flipCard } from '@/store/features/game/game-slice.ts'
 
-interface GameBoardProps extends React.HTMLAttributes<HTMLDivElement> {
-  rows?: number
-  columns?: number
-}
+type GameBoardProps = React.HTMLAttributes<HTMLDivElement>
 
 const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
-  ({ className, rows = 8, columns = 16, ...props }, ref) => {
-    const flippedCards = useAppSelector(state => state.game.flippedCards)
+  ({ className, ...props }, ref) => {
+    const { flippedCards, boardSize } = useAppSelector(state => state.game)
+    const { rows, columns } = boardSize
     const dispatch = useAppDispatch()
 
     // Create an array of card data
@@ -26,16 +24,16 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
 
     return (
       <div
-        className={cn('w-full grid gap-4 p-4', className)}
+        className={cn('w-full grid gap-4 p-4 justify-center', className)}
         style={{
-          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${columns}, auto)`,
+          gridTemplateRows: `repeat(${rows}, auto)`,
         }}
         ref={ref}
         {...props}
       >
         {cards.map(card => (
-          <div key={card.id} className="aspect-square">
+          <div key={card.id} className="aspect-square w-24 h-24">
             <GameCard
               onClick={() => dispatch(flipCard(card.id))}
               isFlipped={flippedCards.includes(card.id)}

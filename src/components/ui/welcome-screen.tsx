@@ -26,7 +26,7 @@ export default function WelcomeScreen({ onStartGame }: WelcomeScreenProps) {
     <div className="flex flex-col flex-grow">
       {!showHowToPlay ? (
         <div className="flex flex-col items-center justify-center flex-grow">
-          <h1 className="text-7xl font-bold mb-8 text-primary flex justify-center items-center gap-4">
+          <h1 className="text-7xl font-bold mb-8 text-primary flex justify-center items-center gap-4 bg-secondary/50 p-4 rounded-xl border-2 border-primary/20">
             <span className="text-4xl">🎮</span>
             <span>Memory Game</span>
             <span className="text-4xl">🧠</span>
@@ -34,6 +34,13 @@ export default function WelcomeScreen({ onStartGame }: WelcomeScreenProps) {
           <p className="text-xl mb-6 bg-secondary/50 p-4 rounded-xl border-2 border-primary/20 shadow-[0_4px_0_0] shadow-primary/20 max-w-md">
             Welcome to the Memory Game!
           </p>
+          {/*<div className="mb-6 flex justify-center">*/}
+          {/*  <img */}
+          {/*    src={gameplayImage} */}
+          {/*    alt="Gameplay Preview" */}
+          {/*    className="rounded-xl border-2 border-primary/20 shadow-[0_4px_0_0] shadow-primary/20 max-w-md w-full object-cover"*/}
+          {/*  />*/}
+          {/*</div>*/}
           <div className="flex justify-center gap-4 mb-6">
             <Button onClick={handleStartGame} variant="default" size="lg">
               Start Game

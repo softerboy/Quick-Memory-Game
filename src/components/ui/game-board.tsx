@@ -36,7 +36,7 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
     return (
       <div
         className={cn(
-          'w-full h-full grid gap-1 sm:gap-2 p-1 sm:p-2 justify-center content-center max-h-full',
+          'w-full h-full grid gap-2 sm:gap-3 p-2 sm:p-3 justify-center content-center max-h-full bg-secondary/50 rounded-xl border-2 border-primary/20',
           className
         )}
         style={{
@@ -53,7 +53,7 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
               isFlipped={flippedCards.includes(index) || matchedPairs.includes(index)}
               backContent={
                 <div className="text-center p-1">
-                  <span className="text-3xl sm:text-2xl md:text-3xl">{card.emoji}</span>
+                  <span className="text-4xl sm:text-3xl md:text-4xl">{card.emoji}</span>
                 </div>
               }
             />

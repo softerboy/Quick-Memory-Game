@@ -22,12 +22,12 @@ const GameCard = React.forwardRef<HTMLDivElement, GameCardProps>(
           )}
         >
           {/* Front of card */}
-          <div className="absolute w-full h-full backface-hidden bg-primary/10 rounded-lg border flex items-center justify-center rotate-y-0">
+          <div className="absolute w-full h-full backface-hidden bg-primary/10 rounded-xl border-2 border-primary/30 shadow-[0_4px_0_0] shadow-primary/30 flex items-center justify-center rotate-y-0">
             {frontContent || <div className="text-4xl font-bold text-primary/40">?</div>}
           </div>
 
           {/* Back of card */}
-          <div className="absolute w-full h-full backface-hidden bg-white rounded-lg border flex items-center justify-center rotate-y-180">
+          <div className="absolute w-full h-full backface-hidden bg-card rounded-xl border-2 border-primary/30 shadow-[0_4px_0_0] shadow-primary/30 flex items-center justify-center rotate-y-180">
             {backContent || <div className="text-2xl font-bold">Content</div>}
           </div>
         </div>

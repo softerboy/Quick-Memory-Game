@@ -1,28 +1,44 @@
-import type { FC } from 'react'
+import React, { type FC } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { GameBoard } from '@/components/ui/game-board'
 
-import { useAppDispatch, useAppSelector } from '@/hooks/store.ts'
-import { decrement, increment } from '@/store/features/counter/counterSlice.ts'
+import { useAppSelector } from '@/hooks/store.ts'
 
 const App: FC = () => {
   const count = useAppSelector(state => state.counter.count)
-  const dispatch = useAppDispatch()
+  const [gameStarted, setGameStarted] = React.useState(false)
 
   return (
-    <div className="max-w-7xl mx-auto p-8 text-center">
+    <div className="max-w-7xl mx-auto p-4 text-center">
       <h1 className="text-4xl font-bold mb-4">Memory Game</h1>
-      <p className="text-lg mb-6">Welcome to the Memory Game!</p>
-      <div className="flex justify-center gap-4">
-        <Button onClick={() => dispatch(increment())} variant="default">
-          Start Game
-        </Button>
-        <Button onClick={() => dispatch(decrement())} variant="outline">
-          How to Play
-        </Button>
 
-        <h1>{count}</h1>
-      </div>
+      {!gameStarted ? (
+        <>
+          <p className="text-lg mb-6">Welcome to the Memory Game!</p>
+          <div className="flex justify-center gap-4 mb-8">
+            <Button onClick={() => setGameStarted(true)} variant="default" size="lg">
+              Start Game
+            </Button>
+            <Button variant="outline" size="lg">
+              How to Play
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-4">
+            <Button onClick={() => setGameStarted(false)} variant="outline">
+              Back to Menu
+            </Button>
+            <div className="text-lg font-medium">Score: {count}</div>
+          </div>
+
+          <div className="h-[70vh]">
+            <GameBoard />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

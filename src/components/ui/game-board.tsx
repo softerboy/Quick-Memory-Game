@@ -1,26 +1,37 @@
 import * as React from 'react'
+import { useEffect } from 'react'
 
 import { cn } from '@/lib/utils'
 
 import { GameCard } from './game-card'
 import { useAppDispatch, useAppSelector } from '@/hooks/store.ts'
-import { flipCard } from '@/store/features/game/game-slice.ts'
+import { flipCard, initializeGame, checkCards } from '@/store/features/game/game-slice.ts'
 
 type GameBoardProps = React.HTMLAttributes<HTMLDivElement>
 
 const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
   ({ className, ...props }, ref) => {
-    const { flippedCards, boardSize } = useAppSelector(state => state.game)
+    const { flippedCards, matchedPairs, boardSize, cardContents, isChecking } = useAppSelector(
+      state => state.game
+    )
     const { rows, columns } = boardSize
     const dispatch = useAppDispatch()
 
-    // Create an array of card data
-    const cards = React.useMemo(() => {
-      return Array.from({ length: rows * columns }, (_, index) => ({
-        id: index,
-        content: `Card ${index + 1}`,
-      }))
-    }, [rows, columns])
+    // Initialize the game when the component mounts
+    useEffect(() => {
+      dispatch(initializeGame())
+    }, [dispatch])
+
+    // Handle the 1-second delay for flipping non-matching cards back
+    useEffect(() => {
+      if (isChecking) {
+        const timer = setTimeout(() => {
+          dispatch(checkCards())
+        }, 1000)
+
+        return () => clearTimeout(timer)
+      }
+    }, [isChecking, dispatch])
 
     return (
       <div
@@ -32,14 +43,14 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
         ref={ref}
         {...props}
       >
-        {cards.map(card => (
-          <div key={card.id} className="aspect-square w-24 h-24">
+        {cardContents.map((card, index) => (
+          <div key={index} className="aspect-square w-24 h-24">
             <GameCard
-              onClick={() => dispatch(flipCard(card.id))}
-              isFlipped={flippedCards.includes(card.id)}
+              onClick={() => dispatch(flipCard(index))}
+              isFlipped={flippedCards.includes(index) || matchedPairs.includes(index)}
               backContent={
                 <div className="text-center p-2">
-                  <span className="text-lg font-medium">{card.content}</span>
+                  <span className="text-4xl">{card.emoji}</span>
                 </div>
               }
             />

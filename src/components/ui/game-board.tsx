@@ -53,7 +53,7 @@ const GameBoard = React.forwardRef<HTMLDivElement, GameBoardProps>(
               isFlipped={flippedCards.includes(index) || matchedPairs.includes(index)}
               backContent={
                 <div className="text-center p-1">
-                  <span className="text-4xl sm:text-3xl md:text-4xl">{card.emoji}</span>
+                  <span className="text-2xl sm:text-3xl md:text-4xl">{card.emoji}</span>
                 </div>
               }
             />

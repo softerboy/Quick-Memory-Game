@@ -1,0 +1,22 @@
+# Production stack. The box holds no checkout: CI drives this file over a remote
+# Docker context (see .github/workflows/deploy.yml). The container joins the
+# shared external `edge` network, where the edge proxy (softerboy/infra) reaches
+# it as memory-game:8080 for memory.fumarov.me.
+services:
+  memory-game:
+    image: ${IMAGE:-ghcr.io/softerboy/quick-memory-game:latest}
+    container_name: memory-game
+    restart: unless-stopped
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - edge
+
+networks:
+  edge:
+    external: true

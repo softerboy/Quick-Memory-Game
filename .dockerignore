@@ -1,0 +1,8 @@
+.git
+.github
+.husky
+.idea
+node_modules
+dist
+Dockerfile
+compose.prod.yaml
